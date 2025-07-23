@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { FaChevronRight } from "react-icons/fa";
 
 import { IconButton, IconButtonProps } from "@components/IconButton";
 
@@ -12,7 +13,8 @@ const meta: Meta<IconButtonProps> = {
 
 const Default: StoryObj<IconButtonProps> = {
   args: {
-    renderIcon: () => <div>Icon</div>,
+    disabled: false,
+    renderIcon: () => <FaChevronRight />,
   },
 };
 

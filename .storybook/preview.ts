@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/nextjs-vite";
+import "../src/shared/styles/globals.css";
 
 const preview: Preview = {
   tags: ["autodocs"],
@@ -13,4 +14,3 @@ const preview: Preview = {
 };
 
 export default preview;
-
