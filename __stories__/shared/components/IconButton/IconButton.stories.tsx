@@ -7,7 +7,7 @@ const meta: Meta<IconButtonProps> = {
   title: "Components/IconButton",
   component: IconButton,
   argTypes: {
-    onClick: { action: "clicked" },
+    onClick: { action: "onClick" },
   },
 };
 

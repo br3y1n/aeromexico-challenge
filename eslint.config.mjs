@@ -57,6 +57,7 @@ const eslintConfig = [
         },
       ],
       "import/no-cycle": "error",
+      "react/display-name": "off",
       "@next/next/no-img-element": "off",
       "import/no-useless-path-segments": "error",
       "import/no-unresolved": "error",

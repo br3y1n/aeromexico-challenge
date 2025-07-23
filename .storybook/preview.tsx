@@ -2,6 +2,7 @@ import { robotoCondensed } from "../src/app/layout";
 
 import type { Preview } from "@storybook/nextjs-vite";
 
+import "./storybook.css";
 import "../src/shared/styles/globals.css";
 
 const preview: Preview = {
