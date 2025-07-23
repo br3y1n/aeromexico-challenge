@@ -1,6 +1,16 @@
-import type { Metadata } from "next";
-import "@styles/globals.css";
+import clsx from "clsx";
+import { Roboto_Condensed } from "next/font/google";
 import { ReactNode } from "react";
+
+import type { Metadata } from "next";
+
+import "@styles/globals.css";
+
+const robotoCondensed = Roboto_Condensed({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  display: "swap",
+});
 
 const metadata: Metadata = {
   title: "Aeroméxico challenge",
@@ -12,9 +22,9 @@ const RootLayout = ({
 }: Readonly<{
   children: ReactNode;
 }>) => (
-  <html lang="en" className="w-full h-full">
+  <html lang="en" className={clsx("w-full h-full", robotoCondensed.className)}>
     <body className="h-full w-full">{children}</body>
   </html>
 );
 
-export { RootLayout as default, metadata };
+export { RootLayout as default, metadata, robotoCondensed };

@@ -17,6 +17,7 @@
   --color-green-500: #9edf25;
   --color-green-400: #f1f510;
   --color-green-600: #76dd00;
+  --color-green-700: #608f09;
 
   --color-red-500: #e40000;
   --color-red-400: #e92507;
@@ -30,4 +31,6 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 90rem;
+
+  --text-md: 1rem;
 }

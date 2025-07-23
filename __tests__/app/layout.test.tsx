@@ -3,6 +3,10 @@ import React from "react";
 
 import RootLayout from "../../src/app/layout";
 
+vi.mock("next/font/google", () => ({
+  Roboto_Condensed: () => ({ className: "roboto-condensed" }),
+}));
+
 describe("RootLayout tests:", () => {
   it("renders children inside the layout", () => {
     render(

@@ -1,4 +1,7 @@
+import { robotoCondensed } from "../src/app/layout";
+
 import type { Preview } from "@storybook/nextjs-vite";
+
 import "../src/shared/styles/globals.css";
 
 const preview: Preview = {
@@ -11,6 +14,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <div className={robotoCondensed.className}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;
