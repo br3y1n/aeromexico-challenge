@@ -1,7 +1,11 @@
+import { CharacterImplementationEnum } from "@character/repositories/character-implementation.enum";
+
 const configEnvs = {
   API: process.env.NEXT_PUBLIC_API ?? "",
 
-  TARGET_QUESTIONS: process.env.NEXT_PUBLIC_TARGET_CHARACTERS ?? "", // QuestionImplementationEnum.LOCAL,
+  TARGET_CHARACTERS:
+    process.env.NEXT_PUBLIC_TARGET_CHARACTERS ??
+    CharacterImplementationEnum.LOCAL,
 
   LOCAL_DELAY_RESPONSE_MS: Number(
     process.env.NEXT_PUBLIC_LOCAL_DELAY_RESPONSE_MS ?? 500,

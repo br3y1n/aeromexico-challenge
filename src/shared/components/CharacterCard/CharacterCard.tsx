@@ -16,6 +16,7 @@ const CharacterCard = <T = unknown,>({
   liked,
   data,
   className,
+  imageUrl,
 }: CharacterCardProps<T>) => (
   <article
     role="button"
@@ -39,7 +40,8 @@ const CharacterCard = <T = unknown,>({
     </h3>
 
     <SafeImage
-      className="lg:w-[146px] lg:h-[146px] w-[100px] h-[100px] shrink-0"
+      src={imageUrl}
+      className="lg:w-[146px] lg:h-[146px] w-[100px] h-[100px] shrink-0 bg-gray-400"
       alt={`Image of ${title}`}
       aria-hidden={false}
     />

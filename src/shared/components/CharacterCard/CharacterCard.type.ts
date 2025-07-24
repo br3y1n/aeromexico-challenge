@@ -1,6 +1,7 @@
 interface CharacterCardProps<T = unknown> {
   data: T;
   title: string;
+  imageUrl?: string;
   onLike: (data: T) => void;
   onClick: (T: T) => void;
   selected?: boolean;
