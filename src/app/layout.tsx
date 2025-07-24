@@ -23,7 +23,16 @@ const RootLayout = ({
   children: ReactNode;
 }>) => (
   <html lang="en" className={clsx("w-full h-full", robotoCondensed.className)}>
-    <body className="h-full w-full">{children}</body>
+    <body className="h-full w-full">
+      <section className="w-full h-full flex flex-col overflow-auto">
+        {children}
+        <footer className="flex items-end justify-center p-2 bg-linear-180 from-[3%] from-green-500 to-gray-800 to-[177%] h-[50px] lg:h-[150px] w-full shrink-0">
+          <p className="text-sm text-center">
+            © the Brayayin, {new Date().getFullYear()} - All rights reserved.
+          </p>
+        </footer>
+      </section>
+    </body>
   </html>
 );
 
