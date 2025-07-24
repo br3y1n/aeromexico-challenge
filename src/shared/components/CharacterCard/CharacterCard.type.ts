@@ -5,6 +5,7 @@ interface CharacterCardProps<T = unknown> {
   onClick: (T: T) => void;
   selected?: boolean;
   liked?: boolean;
+  className?: string;
 }
 
 export type { CharacterCardProps };

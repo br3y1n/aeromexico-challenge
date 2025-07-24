@@ -6,7 +6,7 @@ describe("Characters tests:", () => {
   it("should render a title", () => {
     render(<Characters />);
 
-    const title = screen.getByText(/characters/i);
+    const title = screen.getByPlaceholderText(/character/i);
 
     expect(title).toBeTruthy();
   });

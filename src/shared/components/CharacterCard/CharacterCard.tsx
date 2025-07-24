@@ -15,6 +15,7 @@ const CharacterCard = <T = unknown,>({
   selected,
   liked,
   data,
+  className,
 }: CharacterCardProps<T>) => (
   <article
     role="button"
@@ -22,8 +23,9 @@ const CharacterCard = <T = unknown,>({
     aria-pressed={selected}
     aria-label={`Character card: ${title}. ${selected ? "Selected" : "Not selected"}`}
     className={clsx(
-      "h-[226px] w-[190px] bg-gray-850/80 hover:bg-gray-700 rounded-[30px] shadow-card cursor-pointer px-5 py-2.5 text-white flex flex-col gap-1.5 items-center",
+      "lg:h-[226px] h-[170px] w-[140px] lg:w-[190px] bg-gray-850 md:bg-gray-850/80 hover:bg-gray-700 rounded-[30px] shadow-card cursor-pointer px-5 py-2.5 text-white flex flex-col gap-1.5 items-center",
       selected && "border-2 border-green-600",
+      className,
     )}
     onClick={() => onClick(data)}
     onKeyDown={(e) => {
@@ -32,10 +34,12 @@ const CharacterCard = <T = unknown,>({
       }
     }}
   >
-    <h3 className="uppercase text-sm tracking-[1.25px] mb-2">{title}</h3>
+    <h3 className="uppercase text-xs lg:text-sm tracking-[1.25px] lg:mb-2">
+      {title}
+    </h3>
 
     <SafeImage
-      className="w-[146px] h-[146px] shrink-0"
+      className="lg:w-[146px] lg:h-[146px] w-[100px] h-[100px] shrink-0"
       alt={`Image of ${title}`}
       aria-hidden={false}
     />
@@ -58,7 +62,7 @@ const CharacterCard = <T = unknown,>({
         <FaRegHeart aria-hidden="true" className="h-6 w-6" />
       </button>
 
-      <p className="text-md ">{likeText}</p>
+      <p className="text-md">{likeText}</p>
     </div>
   </article>
 );

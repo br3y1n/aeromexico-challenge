@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Button } from "@components/Button";
@@ -11,16 +12,18 @@ const ActionDropdown = ({
   onItemClick,
   onActionClick,
   actionIcon,
+  className,
 }: ActionDropdownProps) => {
   const { containerRef, toggleOpen, isOpen } = useActionDropdownState();
 
   return (
-    <div ref={containerRef} className="relative h-fit w-fit">
+    <div ref={containerRef} className={clsx("relative h-fit w-fit", className)}>
       <Button
         onClick={toggleOpen}
         aria-haspopup="true"
         aria-expanded={isOpen}
         text={label}
+        className={className}
       />
 
       <AnimatePresence>

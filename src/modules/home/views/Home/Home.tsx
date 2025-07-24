@@ -13,7 +13,7 @@ const Home = () => {
   const { goToCharacters } = useGoTo();
 
   return (
-    <div className="relative w-full flex flex-col justify-center items-center gap-6 px-4 py-10 flex-1 bg-gray-900">
+    <section className="relative w-full h-full flex flex-col justify-center items-center gap-6 px-4 py-10 bg-gray-900">
       <div className="text-center">
         <h1 className="font-bold text-3xl md:text-4xl text-white">{title}</h1>
         <h2 className="text-lg md:text-xl text-gray-400 mt-2">{subtitle}</h2>
@@ -36,7 +36,7 @@ const Home = () => {
         className="absolute bottom-0"
         text="Let's Go! →"
       />
-    </div>
+    </section>
   );
 };
 

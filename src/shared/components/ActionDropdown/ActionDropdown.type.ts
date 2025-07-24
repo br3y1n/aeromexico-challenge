@@ -11,6 +11,7 @@ interface ActionDropdownProps {
   onItemClick?: (item: ActionDropdownItem) => void;
   onActionClick?: (item: ActionDropdownItem) => void;
   actionIcon?: ReactNode;
+  className?: string;
 }
 
 export type { ActionDropdownItem, ActionDropdownProps };
