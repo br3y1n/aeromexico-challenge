@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-import { Button } from "@components/Button";
+import { Button, ButtonProps } from "@components/Button";
 
-const meta: Meta<typeof Button> = {
+const meta: Meta<ButtonProps> = {
   title: "Components/Button",
   component: Button,
   argTypes: {
@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   },
 };
 
-const Default: StoryObj<typeof Button> = {
+const Default: StoryObj<ButtonProps> = {
   args: {
     disabled: false,
     text: "Next",
