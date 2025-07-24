@@ -30,6 +30,9 @@
       "@*": [
         "src/modules/*",
         "src/shared/*"
+      ],
+      "@app/*": [
+        "src/app/*"
       ]
     },
   },
