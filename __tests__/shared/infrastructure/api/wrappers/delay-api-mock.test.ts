@@ -1,7 +1,7 @@
 import { configEnvs } from "@constants/config-envs.const";
-import { delayApiLocal } from "@infrastructure/api/wrappers/delay-api-local";
+import { delayApiMock } from "@infrastructure/api/wrappers/delay-api-mock";
 
-describe("delayApiLocal tests:", () => {
+describe("delayApiMock tests:", () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -13,12 +13,12 @@ describe("delayApiLocal tests:", () => {
   it("should delay execution and return the result", async () => {
     const mockFn = vi.fn().mockResolvedValue("done");
 
-    const wrapped = delayApiLocal(mockFn);
+    const wrapped = delayApiMock(mockFn);
     const promise = wrapped("arg1", "arg2");
 
     expect(mockFn).not.toHaveBeenCalled();
 
-    vi.advanceTimersByTime(configEnvs.LOCAL_DELAY_RESPONSE_MS);
+    vi.advanceTimersByTime(configEnvs.MOCK_DELAY_RESPONSE_MS);
 
     await expect(promise).resolves.toBe("done");
     expect(mockFn).toHaveBeenCalledWith("arg1", "arg2");

@@ -1,6 +1,6 @@
 enum CharacterImplementationEnum {
   API = "api",
-  LOCAL = "local",
+  MOCK = "mock",
 }
 
 export { CharacterImplementationEnum };

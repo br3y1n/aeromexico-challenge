@@ -2,11 +2,11 @@ import { characterAdapter } from "@character/adapters/character.adapter";
 import { CharacterApiResponse } from "@character/adapters/character.adapter.type";
 import { StatusEnum } from "@enums";
 import { catchApiErrors } from "@infrastructure/api/wrappers/catch-api-errors";
-import { delayApiLocal } from "@infrastructure/api/wrappers/delay-api-local";
+import { delayApiMock } from "@infrastructure/api/wrappers/delay-api-mock";
 
 import { CharacterRepository } from "../character-repository.interface";
 
-class CharacterLocalRepository implements CharacterRepository {
+class CharacterMockRepository implements CharacterRepository {
   private readonly _characters: CharacterApiResponse[] = [
     {
       name: "The brayayin",
@@ -42,7 +42,7 @@ class CharacterLocalRepository implements CharacterRepository {
     },
   ];
 
-  getCharacters = delayApiLocal(
+  getCharacters = delayApiMock(
     catchApiErrors(async (filters?: Record<string, string>) => {
       const filterName = filters?.name ?? "";
 
@@ -53,4 +53,4 @@ class CharacterLocalRepository implements CharacterRepository {
   );
 }
 
-export { CharacterLocalRepository };
+export { CharacterMockRepository };

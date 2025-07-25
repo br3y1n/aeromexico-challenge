@@ -4,19 +4,19 @@ import { createApiClient } from "@infrastructure/api/api-client.factory";
 import { CharacterImplementationEnum } from "./character-implementation.enum";
 import { CharacterRepository } from "./character-repository.interface";
 import { CharacterApiRepository } from "./implementations/character-api.repository";
-import { CharacterLocalRepository } from "./implementations/character-local.repository";
+import { CharacterMockRepository } from "./implementations/character-mock.repository";
 
 class CharacterRepositoryFactory implements CharacterRepository {
   private _apiRepository?: CharacterApiRepository;
-  private _localRepository?: CharacterLocalRepository;
+  private _mockRepository?: CharacterMockRepository;
 
   private _getRepository = (target: CharacterImplementationEnum) => {
     const repositories = {
-      [CharacterImplementationEnum.LOCAL]: () => {
-        if (!this._localRepository)
-          this._localRepository = new CharacterLocalRepository();
+      [CharacterImplementationEnum.MOCK]: () => {
+        if (!this._mockRepository)
+          this._mockRepository = new CharacterMockRepository();
 
-        return this._localRepository!;
+        return this._mockRepository!;
       },
       [CharacterImplementationEnum.API]: () => {
         if (!this._apiRepository)
@@ -27,7 +27,7 @@ class CharacterRepositoryFactory implements CharacterRepository {
     };
 
     return (
-      repositories[target] ?? repositories[CharacterImplementationEnum.LOCAL]
+      repositories[target] ?? repositories[CharacterImplementationEnum.MOCK]
     )();
   };
 

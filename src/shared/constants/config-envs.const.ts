@@ -5,10 +5,10 @@ const configEnvs = {
 
   TARGET_CHARACTERS:
     process.env.NEXT_PUBLIC_TARGET_CHARACTERS ??
-    CharacterImplementationEnum.LOCAL,
+    CharacterImplementationEnum.MOCK,
 
-  LOCAL_DELAY_RESPONSE_MS: Number(
-    process.env.NEXT_PUBLIC_LOCAL_DELAY_RESPONSE_MS ?? 500,
+  MOCK_DELAY_RESPONSE_MS: Number(
+    process.env.NEXT_PUBLIC_MOCK_DELAY_RESPONSE_MS ?? 500,
   ),
 
   NUMBER_RETRIES_REQUEST: Number(

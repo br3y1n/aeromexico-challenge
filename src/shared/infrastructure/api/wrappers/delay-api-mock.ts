@@ -1,13 +1,13 @@
 import { configEnvs } from "@constants/config-envs.const";
 
-const delayApiLocal =
+const delayApiMock =
   <CurrentValue, Args>(fn: (...args: Args[]) => Promise<CurrentValue>) =>
   async (...args: Args[]): Promise<CurrentValue> => {
     return await new Promise((resolve) =>
       setTimeout(() => {
         resolve(fn(...args));
-      }, configEnvs.LOCAL_DELAY_RESPONSE_MS),
+      }, configEnvs.MOCK_DELAY_RESPONSE_MS),
     );
   };
 
-export { delayApiLocal };
+export { delayApiMock };
