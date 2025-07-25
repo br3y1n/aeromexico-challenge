@@ -1,10 +1,15 @@
 import { render, screen } from "@testing-library/react";
 
 import Characters from "@app/characters/page";
+import { QueryProvider } from "@providers/QueryProvider";
 
 describe("Characters tests:", () => {
   it("should render a title", () => {
-    render(<Characters />);
+    render(
+      <QueryProvider>
+        <Characters />
+      </QueryProvider>,
+    );
 
     const title = screen.getByPlaceholderText(/character/i);
 
