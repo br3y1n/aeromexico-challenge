@@ -7,8 +7,8 @@ import { CharacterApiRepository } from "./implementations/character-api.reposito
 import { CharacterMockRepository } from "./implementations/character-mock.repository";
 
 class CharacterRepositoryFactory implements CharacterRepository {
-  private _apiRepository?: CharacterApiRepository;
-  private _mockRepository?: CharacterMockRepository;
+  private _apiRepository?: CharacterRepository;
+  private _mockRepository?: CharacterRepository;
 
   private _getRepository = (target: CharacterImplementationEnum) => {
     const repositories = {

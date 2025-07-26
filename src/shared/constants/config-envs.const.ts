@@ -4,7 +4,7 @@ import { CharacterImplementationEnum } from "@character/repositories/character-i
 const configEnvs = {
   CHARACTER_API: process.env.NEXT_PUBLIC_CHARACTER_API ?? "",
 
-  FAVORITE_API: process.env.NEXT_PUBLIC_FAVOTIRE_API ?? "",
+  FAVORITE_API: process.env.NEXT_PUBLIC_FAVORITE_API ?? "",
 
   TARGET_CHARACTERS:
     process.env.NEXT_PUBLIC_TARGET_CHARACTERS ??

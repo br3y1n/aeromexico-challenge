@@ -22,9 +22,9 @@ const Characters = () => {
     characters,
     control,
     characterSelected,
-    charactersLiked,
-    removeCharacterLiked,
     toggleCharacterLiked,
+    favoritesIndexed,
+    removeFavorite,
     setCharacterSelected,
     error,
     isLoading,
@@ -133,7 +133,7 @@ const Characters = () => {
                               onClick={setCharacterSelected}
                               onLike={toggleCharacterLiked}
                               selected={characterSelected?.id === character.id}
-                              liked={!!charactersLiked[character.id]}
+                              liked={!!favoritesIndexed[character.id]}
                               title={character.name}
                               imageUrl={character.imageUrl}
                               className="justify-self-center lg:even:justify-self-end self-center"
@@ -162,17 +162,15 @@ const Characters = () => {
             <div className="absolute bottom-0 w-fit left-1/2 md:left-3/4 -translate-x-1/2 z-50">
               <ActionDropdown
                 className="not-md:w-[300px]"
-                items={Object.values(charactersLiked).map(({ id, name }) => ({
+                items={Object.values(favoritesIndexed).map(({ id, name }) => ({
                   id,
                   label: name,
                 }))}
                 label="Favs"
-                onActionClick={({ id }) =>
-                  removeCharacterLiked(charactersLiked[id])
-                }
+                onActionClick={({ id }) => removeFavorite(favoritesIndexed[id])}
                 actionIcon={<TbTrash className="h-5 w-5" />}
                 onItemClick={({ id }) =>
-                  setCharacterSelected(charactersLiked[id])
+                  setCharacterSelected(favoritesIndexed[id])
                 }
               />
             </div>

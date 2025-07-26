@@ -5,6 +5,7 @@ interface ApiClient {
     data?: Data,
     config?: unknown,
   ): Promise<Response>;
+  delete<Response>(url: string): Promise<Response>;
 }
 
 export type { ApiClient };

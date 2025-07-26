@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { useAddFavorite } from "@character/hooks/useAddFavorite";
 import { useCharacters } from "@character/hooks/useCharacters";
+import { useFavorites } from "@character/hooks/useFavorites";
+import { useRemoveFavorite } from "@character/hooks/useRemoveFavorite";
+import { CharacterFavoriteRepositoryFactory } from "@character/repositories/character-favorite-repository.factory";
 import { CharacterRepositoryFactory } from "@character/repositories/character-repository.factory";
 import { Character } from "@character/types/character.type";
 import { useDebounce } from "@hooks/useDebounce";
@@ -11,13 +15,17 @@ const ITEMS_PER_PAGE = 4;
 const useCharactersState = () => {
   const form = useForm({ defaultValues: { search: "", page: "1" } });
   const { control, watch, setValue } = form;
-  const repository = useMemo(() => new CharacterRepositoryFactory(), []);
+  const characterRepository = useMemo(
+    () => new CharacterRepositoryFactory(),
+    [],
+  );
+  const characterFavoriteRepository = useMemo(
+    () => new CharacterFavoriteRepositoryFactory(),
+    [],
+  );
   const [characterSelected, setCharacterSelected] = useState<Character | null>(
     null,
   );
-  const [charactersLiked, setCharactersLiked] = useState<
-    Record<string, Character>
-  >({});
   const { applyDebounce } = useDebounce();
   const watchedFields = watch();
   const [debouncedValues, setDebouncedValues] = useState(watchedFields);
@@ -25,12 +33,42 @@ const useCharactersState = () => {
 
   const {
     data: characterData,
-    isLoading,
-    error,
-  } = useCharacters(repository, {
+    isLoading: isLoadingCharacters,
+    error: errorCharacters,
+  } = useCharacters(characterRepository, {
     name: debouncedValues.search,
     page: watchedFields.page,
   });
+
+  const {
+    data: favoritesData,
+    isLoading: isLoadingFavorites,
+    error: errorFavorites,
+  } = useFavorites(characterFavoriteRepository);
+
+  const {
+    mutate: addFavorite,
+    isPending: isLoadingAddFavorite,
+    isError: isErrorAddFavorite,
+  } = useAddFavorite(characterFavoriteRepository);
+
+  const {
+    mutate: removeFavorite,
+    isPending: isLoadingRemoveFavorite,
+    isError: isErrorRemoveFavorite,
+  } = useRemoveFavorite(characterFavoriteRepository);
+
+  const favoritesIndexed = useMemo(
+    () =>
+      favoritesData?.reduce<Record<string, Character>>(
+        (charactersIndexed, character) => {
+          charactersIndexed[character.id] = character;
+          return charactersIndexed;
+        },
+        {},
+      ) ?? {},
+    [favoritesData],
+  );
 
   const characters = characterData?.characters.slice(
     pageOffset,
@@ -51,25 +89,8 @@ const useCharactersState = () => {
     [pageOffset],
   );
 
-  const removeCharacterLiked = (character: Character) => {
-    setCharactersLiked((prevValues) => {
-      const newValues = { ...prevValues };
-      delete newValues[character.id];
-      return newValues;
-    });
-  };
-
-  const addCharacterLiked = (character: Character) => {
-    setCharactersLiked((prevValues) => ({
-      ...prevValues,
-      [character.id]: character,
-    }));
-  };
-
   const toggleCharacterLiked = (character: Character) => {
-    const fn = charactersLiked[character.id]
-      ? removeCharacterLiked
-      : addCharacterLiked;
+    const fn = favoritesIndexed[character.id] ? removeFavorite : addFavorite;
 
     fn(character);
   };
@@ -110,13 +131,13 @@ const useCharactersState = () => {
 
   return {
     characters,
-    isLoading: isLoading,
-    error: !!error,
+    isLoading: isLoadingCharacters,
+    error: !!errorCharacters,
     control,
     characterSelected,
-    charactersLiked,
+    favoritesIndexed,
     toggleCharacterLiked,
-    removeCharacterLiked,
+    removeFavorite,
     setCharacterSelected,
     hasCharacters: (characters?.length ?? 0) > 0,
     onNextPage:

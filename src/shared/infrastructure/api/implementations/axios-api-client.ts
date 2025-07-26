@@ -19,6 +19,11 @@ class AxiosApiClient implements ApiClient {
     const response = await this.instance.post<T>(url, data);
     return response.data;
   }
+
+  async delete<T>(url: string): Promise<T> {
+    const response = await this.instance.delete<T>(url);
+    return response.data;
+  }
 }
 
 export { AxiosApiClient };
