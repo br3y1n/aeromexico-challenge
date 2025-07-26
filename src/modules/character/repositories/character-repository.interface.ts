@@ -1,7 +1,9 @@
-import { Character } from "@character/types/character.type";
+import { CharacterResponse } from "@character/types/character.type";
 
 interface CharacterRepository {
-  getCharacters: (filters?: Record<string, string>) => Promise<Character[]>;
+  getCharacters: (
+    filters?: Record<string, string>,
+  ) => Promise<CharacterResponse>;
 }
 
 export type { CharacterRepository };

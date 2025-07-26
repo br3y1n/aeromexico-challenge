@@ -20,7 +20,9 @@ class CharacterRepositoryFactory implements CharacterRepository {
       },
       [CharacterImplementationEnum.API]: () => {
         if (!this._apiRepository)
-          this._apiRepository = new CharacterApiRepository(createApiClient());
+          this._apiRepository = new CharacterApiRepository(
+            createApiClient(configEnvs.CHARACTER_API),
+          );
 
         return this._apiRepository!;
       },

@@ -1,5 +1,6 @@
 enum ApiPathEnum {
-  CHARACTERS = "/characters",
+  CHARACTERS = "/character",
+  FAVORITES = "/favorites",
 }
 
 export { ApiPathEnum };

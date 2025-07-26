@@ -9,12 +9,14 @@ import { CharacterRepository } from "../character-repository.interface";
 class CharacterApiRepository implements CharacterRepository {
   constructor(private readonly apiClient: ApiClient) {}
 
-  getCharacters = catchApiErrors(async () =>
-    characterAdapter(
-      // TODO filters here!
-      await this.apiClient.get<CharacterApiResponse[]>(ApiPathEnum.CHARACTERS),
-    ),
-  );
+  getCharacters = catchApiErrors(async (filters?: Record<string, string>) => {
+    const queryString = new URLSearchParams(filters).toString();
+    const url = `${ApiPathEnum.CHARACTERS}?${queryString}`;
+
+    return characterAdapter(
+      await this.apiClient.get<CharacterApiResponse>(url),
+    );
+  });
 }
 
 export { CharacterApiRepository };

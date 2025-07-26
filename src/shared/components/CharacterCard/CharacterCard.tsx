@@ -35,7 +35,7 @@ const CharacterCard = <T = unknown,>({
       }
     }}
   >
-    <h3 className="uppercase text-xs lg:text-sm tracking-[1.25px] lg:mb-2">
+    <h3 className="uppercase text-xs lg:text-sm tracking-[1.25px] leading-[11px] lg:mb-2 truncate max-w-full">
       {title}
     </h3>
 
