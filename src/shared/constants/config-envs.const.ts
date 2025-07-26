@@ -21,6 +21,8 @@ const configEnvs = {
   NUMBER_RETRIES_REQUEST: Number(
     process.env.NEXT_PUBLIC_NUMBER_RETRIES_REQUEST ?? 2,
   ),
+
+  BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
 };
 
 export { configEnvs };

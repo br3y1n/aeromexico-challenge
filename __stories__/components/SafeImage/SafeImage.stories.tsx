@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ImgHTMLAttributes } from "react";
 
-import { SafeImage } from "@components/SafeImage";
+import { SafeImage, SafeImageProps } from "@components/SafeImage";
 
-const meta: Meta<ImgHTMLAttributes<HTMLImageElement>> = {
+const meta: Meta<SafeImageProps> = {
   title: "Components/SafeImage",
   component: SafeImage,
 };
 
-const Default: StoryObj<ImgHTMLAttributes<HTMLImageElement>> = {
+const Default: StoryObj<SafeImageProps> = {
   args: {
     className: "w-[200px] h-[200px]",
   },
