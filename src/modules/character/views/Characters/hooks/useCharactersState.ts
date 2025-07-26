@@ -9,11 +9,17 @@ import { CharacterFavoriteRepositoryFactory } from "@character/repositories/char
 import { CharacterRepositoryFactory } from "@character/repositories/character-repository.factory";
 import { Character } from "@character/types/character.type";
 import { useDebounce } from "@hooks/useDebounce";
+import { useIsMobile } from "@hooks/useIsMobile";
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE_DESKTOP = 4;
+const ITEMS_PER_PAGE_MOBILE = 2;
 
 const useCharactersState = () => {
   const form = useForm({ defaultValues: { search: "", page: "1" } });
+  const isMobile = useIsMobile();
+  const itemsPerPage = isMobile
+    ? ITEMS_PER_PAGE_MOBILE
+    : ITEMS_PER_PAGE_DESKTOP;
   const { control, watch, setValue } = form;
   const characterRepository = useMemo(
     () => new CharacterRepositoryFactory(),
@@ -40,23 +46,13 @@ const useCharactersState = () => {
     page: watchedFields.page,
   });
 
-  const {
-    data: favoritesData,
-    isLoading: isLoadingFavorites,
-    error: errorFavorites,
-  } = useFavorites(characterFavoriteRepository);
+  const { data: favoritesData } = useFavorites(characterFavoriteRepository);
 
-  const {
-    mutate: addFavorite,
-    isPending: isLoadingAddFavorite,
-    isError: isErrorAddFavorite,
-  } = useAddFavorite(characterFavoriteRepository);
+  const { mutate: addFavorite } = useAddFavorite(characterFavoriteRepository);
 
-  const {
-    mutate: removeFavorite,
-    isPending: isLoadingRemoveFavorite,
-    isError: isErrorRemoveFavorite,
-  } = useRemoveFavorite(characterFavoriteRepository);
+  const { mutate: removeFavorite } = useRemoveFavorite(
+    characterFavoriteRepository,
+  );
 
   const favoritesIndexed = useMemo(
     () =>
@@ -72,7 +68,7 @@ const useCharactersState = () => {
 
   const characters = characterData?.characters.slice(
     pageOffset,
-    pageOffset + ITEMS_PER_PAGE,
+    pageOffset + itemsPerPage,
   );
 
   const totalItemsPerPage = useMemo(() => {
@@ -83,10 +79,10 @@ const useCharactersState = () => {
 
   const { prevPageOffset, nextPageOffset } = useMemo(
     () => ({
-      prevPageOffset: pageOffset - ITEMS_PER_PAGE,
-      nextPageOffset: pageOffset + ITEMS_PER_PAGE,
+      prevPageOffset: pageOffset - itemsPerPage,
+      nextPageOffset: pageOffset + itemsPerPage,
     }),
-    [pageOffset],
+    [pageOffset, itemsPerPage],
   );
 
   const toggleCharacterLiked = (character: Character) => {
@@ -107,7 +103,7 @@ const useCharactersState = () => {
 
   const onBackPage = () => {
     if (prevPageOffset < 0) {
-      setPageOffset(totalItemsPerPage - ITEMS_PER_PAGE);
+      setPageOffset(totalItemsPerPage - itemsPerPage);
       setValue("page", characterData!.prev!);
       return;
     }

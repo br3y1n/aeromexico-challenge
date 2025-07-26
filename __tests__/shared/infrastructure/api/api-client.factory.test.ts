@@ -6,8 +6,8 @@ vi.mock("@infrastructure/api/implementations/axios-api-client");
 
 describe("createApiClient tests:", () => {
   it("should return an instance of AxiosApiClient with the correct baseURL", () => {
-    createApiClient();
+    createApiClient(configEnvs.CHARACTER_API);
 
-    expect(AxiosApiClient).toHaveBeenCalledWith(configEnvs.API);
+    expect(AxiosApiClient).toHaveBeenCalledWith(configEnvs.CHARACTER_API);
   });
 });

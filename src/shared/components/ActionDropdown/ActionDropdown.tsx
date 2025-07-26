@@ -39,32 +39,38 @@ const ActionDropdown = ({
               role="menu"
               className="w-full overflow-y-auto flex flex-col gap-[2px]"
             >
-              {items.map((item) => (
-                <li
-                  key={item.id}
-                  role="menuitem"
-                  tabIndex={0}
-                  className="flex items-center justify-between text-white text-sm cursor-pointer border border-gray-650 bg-gray-400 uppercase px-4 h-[26px] shrink-0"
-                  onClick={() => {
-                    onItemClick?.(item);
-                  }}
-                >
-                  <span className="leading-0">{item.label}</span>
+              {items.length > 0 ? (
+                items.map((item) => (
+                  <li
+                    key={item.id}
+                    role="menuitem"
+                    tabIndex={0}
+                    className="flex items-center justify-between text-white text-sm cursor-pointer border border-gray-650 bg-gray-400 uppercase px-4 h-[26px] shrink-0"
+                    onClick={() => {
+                      onItemClick?.(item);
+                    }}
+                  >
+                    <span className="leading-0">{item.label}</span>
 
-                  {onActionClick && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onActionClick(item);
-                      }}
-                      aria-label={`Action for ${item.label}`}
-                      className="hover:bg-gray-500 cursor-pointer rounded p-[1px]"
-                    >
-                      {actionIcon}
-                    </button>
-                  )}
+                    {onActionClick && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onActionClick(item);
+                        }}
+                        aria-label={`Action for ${item.label}`}
+                        className="hover:bg-gray-500 cursor-pointer rounded p-[1px]"
+                      >
+                        {actionIcon}
+                      </button>
+                    )}
+                  </li>
+                ))
+              ) : (
+                <li className="flex justify-center text-white text-sm uppercase px-4 h-[26px] shrink-0">
+                  No items..
                 </li>
-              ))}
+              )}
             </ul>
           </motion.div>
         )}

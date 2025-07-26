@@ -107,16 +107,17 @@ const Characters = () => {
               />
 
               <div className="relative w-full md:py-8 md:pr-10">
-                <IconButton
-                  className="absolute not-md:left-0 not-md:top-1/2 not-md:-translate-y-1/2 md:right-0 md:top-0 not-md:-rotate-90"
-                  renderIcon={() => <FaChevronUp />}
-                  onClick={onPrevPage}
-                  disabled={!onPrevPage}
-                />
+                {onPrevPage && (
+                  <IconButton
+                    className="absolute not-md:left-0 not-md:top-1/2 not-md:-translate-y-1/2 md:right-0 md:top-0 not-md:-rotate-90"
+                    renderIcon={() => <FaChevronUp />}
+                    onClick={onPrevPage}
+                  />
+                )}
 
                 <div
                   className={clsx(
-                    "gap-y-10 md:gap-y-10 gap-x-2 min-h-[380px]",
+                    "gap-y-10 md:gap-y-10 gap-x-2 md:min-h-[380px]",
                     isLoading || characters?.length === 0
                       ? "items-center justify-center flex"
                       : "grid grid-cols-2",
@@ -150,12 +151,13 @@ const Characters = () => {
                   )}
                 </div>
 
-                <IconButton
-                  className="absolute not-md:top-1/2 not-md:-translate-y-1/2 right-0 md:bottom-0 not-md:-rotate-90"
-                  renderIcon={() => <FaChevronDown />}
-                  onClick={onNextPage}
-                  disabled={!onNextPage}
-                />
+                {onNextPage && (
+                  <IconButton
+                    className="absolute not-md:top-1/2 not-md:-translate-y-1/2 right-0 md:bottom-0 not-md:-rotate-90"
+                    renderIcon={() => <FaChevronDown />}
+                    onClick={onNextPage}
+                  />
+                )}
               </div>
             </div>
 

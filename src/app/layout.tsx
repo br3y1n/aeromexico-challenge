@@ -41,4 +41,4 @@ const RootLayout = ({
   </html>
 );
 
-export { RootLayout as default, metadata, robotoCondensed };
+export { RootLayout as default, metadata };
