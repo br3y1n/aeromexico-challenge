@@ -1,129 +1,107 @@
 # ✈️ Aeromexico Challenge - Rick and Morty Characters
 
-Aeromexico Challenge is a frontend application built with **Next.js**, designed to showcase character data from the public **Rick and Morty API**. The app fetches and displays characters in responsive cards, demonstrating clean architecture, modular design, and UI integration.
+A frontend application built with **Next.js** that displays character data from the **Rick and Morty API**, with options to use either mock data or real API endpoints.
 
-## 🚀 Installation
+## 🚀 Quick Start
 
-1. Clone the repository:
+1. **Ensure you have Yarn installed**:
+
+   ```bash
+   npm install --global yarn
+   ```
+
+2. **Set up the project**:
 
    ```bash
    git clone https://github.com/br3y1n/aeromexico-challenge.git
    cd aeromexico-challenge
-   ```
-
-2. Install dependencies:
-
-   ```bash
    yarn install
    ```
 
-## 🏗️ Available Scripts
+3. **Launch the application**:
 
-- **Development**
+   ```bash
+   # For mock data mode (default):
+   yarn launch
 
-  ```bash
-  yarn dev
-  ```
+   # For API mode (external APIs + JSON server):
+   yarn launch:all
+   ```
 
-  Starts the development server.
+## 🏗️ Launch Options
 
-- **Build**
+### 🧩 Mock Data Mode (Recommended for development)
 
-  ```bash
-  yarn build
-  ```
-
-  Generates an optimized production build.
-
-- **Production Run**
-
-  ```bash
-  yarn start
-  ```
-
-  Runs the application in production mode.
-
-- **Linting**
-
-  ```bash
-  yarn lint
-  ```
-
-  Checks for linting issues.
-
-- **Fix Linting Issues**
-
-  ```bash
-  yarn lint:fix
-  ```
-
-  Runs ESLint and automatically fixes errors.
-
-- **Type Checking**
-
-  ```bash
-  yarn type-check
-  ```
-
-  Runs TypeScript compiler (`tsc`) to check for type errors.
-
-## 🌍 **Environment Variables**
-
-### 🔗 **API Configuration**
-
-```env
-NEXT_PUBLIC_API=https://localhost:8000/api
+```bash
+yarn launch
 ```
 
-- Defines the base URL of the API where requests will be sent.
-- All external calls will use this endpoint unless a `TARGET` variable specifies that local data should be used.
+- Automatically configures environment variables
+- Uses local mock data for all features
+- No external dependencies needed
+- Includes simulated network delay (200ms)
 
-### 🎯 **Target Definitions**
+### 🌐 Full API Mode
 
-These variables indicate whether the data source will be the API or a local dataset.
-
-```env
-NEXT_PUBLIC_TARGET_CHARACTERS=local
+```bash
+yarn launch:all
 ```
 
-- **Possible values:** `local` (use local data) or `api` (fetch data from the API).
-- If set to `local`, the data will be generated or loaded from a mock within the application.
-- If set to `api`, `NEXT_PUBLIC_API` will be used as the endpoint to retrieve real-time information.
-- Each **target definition** is mapped to a corresponding API path in `shared/infrastructure/api/api-path.enum.ts`, where the actual request will be made.
+- Starts both:
+  - Next.js development server
+  - Local JSON API server (port 8000)
+- Connects to:
+  - Rick and Morty API for characters
+  - Local JSON server for favorites
+- Requires internet connection
 
-### 🔄 **Retry Attempts for Failed Requests**
+## 🌍 Environment Configuration
 
-```env
-NEXT_PUBLIC_NUMBER_RETRIES_REQUEST=2
-```
-
-- Specifies the number of times the application will retry a request in case of failure.
-- **Example:** If the API returns a temporary error, it will retry up to the defined number of times.
-
-### ⏳ **Simulating Delay in Local Responses**
+The application automatically handles environment setup, but you can customize these variables:
 
 ```env
-NEXT_PUBLIC_LOCAL_DELAY_RESPONSE_MS=2000
+# API Endpoints
+NEXT_PUBLIC_CHARACTER_API=https://rickandmortyapi.com/api
+NEXT_PUBLIC_FAVORITE_API=http://localhost:8000
+
+# Data Sources (api | mock)
+NEXT_PUBLIC_TARGET_CHARACTERS=mock
+NEXT_PUBLIC_TARGET_FAVORITES=mock
+
+# Network Settings
+NEXT_PUBLIC_NUMBER_RETRIES_REQUEST=2      # API retry attempts
+NEXT_PUBLIC_MOCK_DELAY_RESPONSE_MS=200    # Mock response delay
 ```
 
-- Defines the delay time (in milliseconds) for responses when `TARGET` is set to `local`.
-- Used to simulate the wait time of a real promise and make the development experience more realistic.
-- **Example:** If `NEXT_PUBLIC_LOCAL_DELAY_RESPONSE_MS=2000`, the response will be delayed by 2 seconds before returning local data.
+## 🛠️ Development Tools
 
-## 🔥 **API Calls and Adapters**
+| Command            | Description                 |
+| ------------------ | --------------------------- |
+| `yarn dev`         | Standard Next.js dev server |
+| `yarn build`       | Create production build     |
+| `yarn start`       | Run production build        |
+| `yarn test`        | Run Vitest tests            |
+| `yarn lint`        | Run ESLint checks           |
+| `yarn check-types` | TypeScript validation       |
 
-### 📂 **Adapters for API Requests and Responses**
+## ✅ Best Practices
 
-- All API requests and responses are handled through **adapters**, located in the `adapters/` folder.
-- Each API response type and the expected format for internal processing are defined in `adapter.type.ts`.
-- The adapter transforms the API response into a format suitable for internal use, ensuring clean architecture principles are followed.
+✔️ **Automatic Environment Setup** - No manual .env configuration needed  
+✔️ **Clean Architecture** - Separated concerns with feature modules  
+✔️ **Type Safety** - Full TypeScript integration  
+✔️ **Adaptive Data Layer** - Switch between mock/API without code changes  
+✔️ **Network Resilience** - Configurable retry logic for API calls  
+✔️ **Realistic Mocks** - Simulated network delays for development
 
-### 🔗 **API Path Mapping**
+## 📌 Core Technologies
 
-- API endpoints are defined in `shared/infrastructure/api/api-path.enum.ts`.
-- Each **target definition** in the environment variables is mapped to a corresponding API path in this file.
-- This file centralizes the management of API routes, determining whether data is fetched from local mocks or the external API.
-- This separation ensures that endpoint management remains flexible and easy to maintain.
+- [Next.js 15](https://nextjs.org/) (App Router)
+- [React 19](https://react.dev/) (Latest features)
+- [React Query](https://tanstack.com/query/v5/) (Server state management)
+- [Tailwind CSS](https://tailwindcss.com/) (Utility-first CSS)
+- [TypeScript](https://www.typescriptlang.org/) (Type safety)
+- [JSON Server](https://github.com/typicode/json-server) (Mock API server)
+- [Vitest](https://vitest.dev/) (Blazing fast tests)
 
 ## 📂 Project Structure
 
@@ -145,27 +123,15 @@ src/                   # Root folder containing all application logic
     ├── hooks/         # Reusable custom hooks
     ├── infrastructure/ # API calls, external services, etc.
     ├── providers/     # Context providers for global state management
-    ├── stores/        # State management using Zustand or other libraries
+    ├── stores/        # State management using Zustand
     ├── styles/        # Global styles and theming
     ├── utils/         # Utility functions and helper methods
     ├── wrappers/      # Higher-order components or wrappers
 ```
 
-## 📌 Technologies Used
+## 🏆 Key Features
 
-- [Next.js](https://nextjs.org/) (Static site generation)
-- [React Query](https://tanstack.com/query/) (Asynchronous state management)
-- [Axios](https://axios-http.com/) (HTTP client)
-- [ESLint](https://eslint.org/) (Code linting)
-- [Prettier](https://prettier.io/) (Automatic formatting)
-- [TailwindCSS](https://tailwindcss.com/) (Styling)
-- [TypeScript](https://www.typescriptlang.org/) (Type safety)
-
-## ✅ Best Practices
-
-✔️ **Clean architecture** based on feature modules.  
-✔️ **Adapters** to separate API data from internal domain models.  
-✔️ **Target switching** to toggle between local and real data.  
-✔️ **Type safety** with TypeScript.  
-✔️ **UI components organized by feature**.  
-✔️ **100% test coverage** with Vitest.
+- **Dual Data Source Support**: Seamless switching between mock and API data
+- **Modular Architecture**: Clean separation of concerns
+- **Comprehensive Testing**: Vitest for unit and integration tests
+- **Developer Experience**: Automatic configuration and realistic mocks
